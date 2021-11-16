@@ -3,13 +3,10 @@ package com.example.SpringBootDemo.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class PasswordConfig {
-//    private final PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
-
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
     @Autowired

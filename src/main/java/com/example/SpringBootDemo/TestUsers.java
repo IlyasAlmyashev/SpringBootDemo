@@ -2,7 +2,6 @@ package com.example.SpringBootDemo;
 
 import com.example.SpringBootDemo.model.Role;
 import com.example.SpringBootDemo.model.User;
-import com.example.SpringBootDemo.security.PasswordConfig;
 import com.example.SpringBootDemo.service.RoleService;
 import com.example.SpringBootDemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +15,11 @@ import java.util.Set;
 public class TestUsers {
     private final UserService userService;
     private final RoleService roleService;
-    private final PasswordConfig passwordConfig;
 
     @Autowired
-    public TestUsers(UserService userService, RoleService roleService, PasswordConfig passwordConfig) {
+    public TestUsers(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordConfig = passwordConfig;
     }
 
     @PostConstruct
