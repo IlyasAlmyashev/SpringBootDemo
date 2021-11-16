@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+</head>
+
+<body>
+<h2>New User</h2>
+<form action="#" th:action="@{/admin/user-create}" th:object="${user}" method="post">
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" th:field="*{username}"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" th:field="*{password}"/></td>
+        </tr>
+        <tr>
+            <td>First name:</td>
+            <td><input type="text" th:field="*{firstName}"/></td>
+        </tr>
+        <tr>
+            <td>Last name:</td>
+            <td><input type="text" th:field="*{lastName}"/></td>
+        </tr>
+        <tr>
+            <td>Phone number:</td>
+            <td><input type="text" th:field="*{phoneNumber}"/></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{email}"/></td>
+        </tr>
+        <input type="checkbox" name="checkBoxRoles" value="ROLE_USER"/>USER
+        <input type="checkbox" name="checkBoxRoles" value="ROLE_ADMIN"/>ADMIN
+        <tr>
+            <td colspan="2"><input type="submit" value="Add User"></td>
+            <td colspan="2"><a href="/admin">Back</a></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
