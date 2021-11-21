@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
 
@@ -19,7 +19,9 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public void saveRole(Role role) {
-        roleRepository.save(role);
+        if (roleRepository.getRoleByRoleName(role.getRoleName()) == null) {
+            roleRepository.save(role);
+        }
     }
 
     @Override

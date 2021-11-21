@@ -4,6 +4,7 @@ import com.example.SpringBootDemo.model.User;
 import com.example.SpringBootDemo.repository.UserRepository;
 import com.example.SpringBootDemo.security.PasswordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,25 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void saveUser(User user) {
-        user.setPassword(passwordConfig.getPasswordEncoder().encode(user.getPassword()));
-        userRepository.save(user);
+        if (userRepository.getUserByUsername(user.getUsername()) == null) {
+            user.setPassword(passwordConfig.getPasswordEncoder().encode(user.getPassword()));
+            userRepository.save(user);
+        }
     }
 
     @Override
     public void updateUser(User user) {
-        user.setPassword(passwordConfig.getPasswordEncoder().encode(user.getPassword()));
-        userRepository.save(user);
+        String oldPassword = user.getPassword();
+        try {
+            if (user.getPassword().equals(oldPassword)) {
+                user.setPassword(oldPassword);
+            } else {
+                passwordConfig.getPasswordEncoder().encode(user.getPassword());
+            }
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            user.setPassword(oldPassword);
+        }
     }
 
     @Override
